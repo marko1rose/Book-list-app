@@ -23,10 +23,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/registerForm").permitAll().antMatchers("/saveUser").permitAll()
-				.antMatchers("/home").hasAnyRole("USER", "ADMIN").antMatchers("/listOfBooks")
-				.hasAnyRole("USER", "ADMIN").antMatchers("/addBook").hasAnyRole("ADMIN").anyRequest().authenticated()
-				.and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
+		http.authorizeRequests().antMatchers("/registerForm").permitAll().antMatchers("/saveBook").permitAll()
+				.antMatchers("/confirm").permitAll().antMatchers("/").permitAll()
+				// .antMatchers("/home").hasAnyRole("USER", "ADMIN")
+				// .antMatchers("/list").hasAnyRole("USER", "ADMIN")
+				.antMatchers("/list").permitAll().antMatchers("/addBook").permitAll().antMatchers("/search").permitAll()
+				.antMatchers("/deleteBook").permitAll().antMatchers("/showUpdateForm").permitAll().and().formLogin()
+				.usernameParameter("email").loginPage("/login").defaultSuccessUrl("/").permitAll().and().logout()
+				.logoutSuccessUrl("/login").permitAll();
 
 		http.csrf().disable();
 	}

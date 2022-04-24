@@ -1,0 +1,50 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title>Add book</title>
+		
+		<link rel="stylesheet" 
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+			integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
+			crossorigin="anonymous" />
+	</head>
+	<body>
+		
+		<div class="container">
+		
+			<h3>Add new book</h3>
+			<hr/>
+			
+			<form th:action="@{/saveBook}" th:object="${book}" method="POST">
+				
+				<input type="text" th:field="*{title}" class="form-control col-4 mb-4" placeholder="Enter title" />
+				
+				<select th:field = "*{id}">
+        			<option th:each="author:${authors}" 
+        					th:value="${author.id}" 
+        					th:text="${author.firstName} + ' ' + ${author.lastName}" 
+        					th:data>
+        			</option>
+                </select>
+				<p></p>
+				
+				<input type="date" th:field="*{releaseDate}" class="form-control col-4 mb-4" placeholder="Enter release date" />
+                
+                <p></p>				
+				<select name="category">
+    					<option th:each="category : ${T(springboot.books.BookList.model.Category).values()}" 
+       					 th:value="${category}" th:text="${category}"></option>
+				</select>
+				
+				 <p></p>
+				<input type="text" th:field="*{imgUrl}" class="form-control col-4 mb-4" placeholder="Enter image url" />
+				
+				<button type="submit" class="btn btn-primary col-2">Save</button>
+				<input type="hidden" th:field="*{id}" />
+			</form>
+			<hr/>
+			<a th:href="@{/list}">Back to list</a>
+		</div>
+		
+	</body>
+</html>

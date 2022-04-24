@@ -34,6 +34,6 @@ public class BookService {
 
 	public Book getBook(long id) {
 		return bookRepository.findById(id)
-				.orElseThrow(() -> new IllegalStateException("User with id=" + id + "not found."));
+				.orElseThrow(() -> new IllegalStateException("Book with id=" + id + "not found."));
 	}
 }

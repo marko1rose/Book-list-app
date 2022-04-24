@@ -14,14 +14,16 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Table(name = "author")
+@Getter
+@Setter
 public class Author {
 
 	@Id
@@ -36,4 +38,9 @@ public class Author {
 	@JsonIgnore
 	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Book> books;
+
+	@Override
+	public String toString() {
+		return "Author [firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
 }

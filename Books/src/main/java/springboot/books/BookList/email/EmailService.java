@@ -29,7 +29,7 @@ public class EmailService implements EmailSender {
 			helper.setText(email, true);
 			helper.setTo(to);
 			helper.setSubject("Confirm your email");
-			helper.setFrom("marko.pasalic245@gmail.com");
+			helper.setFrom("marko_245@windowslive.com");
 			mailSender.send(message);
 		} catch (MessagingException e) {
 			LOGGER.error("failed to send email", e);
